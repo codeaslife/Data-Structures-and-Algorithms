@@ -50,5 +50,16 @@
 ## 计数排序
 
 
+什么时候使用计数排序？
+- Allocating extra sapce is not a issue
+- Values are positive integers
+- Most of the values in the range are present
+
+
+
+
+
+
+
 ## 桶排序
 
