@@ -1,6 +1,7 @@
 package com.codeaslife.Structures.LinkedLists;
 
 public class Solution {
+    // 链表回文串
     public static boolean isPalindrome(Node head) {
         if (head == null || head.next == null) {
             return true;

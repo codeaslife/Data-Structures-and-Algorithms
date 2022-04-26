@@ -1,6 +1,6 @@
 package com.codeaslife.Structures.Trees;
 
-import java.util.Stack;
+import java.util.*;
 
 public class Tree {
     public void preOrderTraverseRec(TreeNode root) {
@@ -99,6 +99,131 @@ public class Tree {
 
 
     // 宽度优先遍历（使用队列）
+    public void bfs(TreeNode root) {
+        if (root != null) {
+            return;
+        }
+        Queue<TreeNode> queue = new LinkedList<>(); // Java中LinkedList是Queue的一种实现
+        queue.add(root);
+        HashMap<TreeNode, Integer> levelMap = new HashMap<>();
+        levelMap.put(root, 1);
+        int curLevel = 1; // 当前在多少层
+        int curLevelNodes = 0; // 当前层有多少节点
+        int max = Integer.MIN_VALUE;
+        while (!queue.isEmpty()) {
+            TreeNode cur = queue.poll();
+            int curNodeLevel = levelMap.get(cur);
+            if (curNodeLevel == curLevel) {
+                curLevelNodes++;
+            } else {
+                max = Math.max(max, curLevelNodes);
+                curLevel++;
+                curLevelNodes = 0;
+            }
+
+            System.out.println(cur.value);
+            if (cur.left != null) {
+                // 进栈之前就记录好节点的层数
+                levelMap.put(cur.left, curNodeLevel + 1);
+                queue.add(cur.left);
+            }
+            if (cur.right != null) {
+                levelMap.put(cur.right, curNodeLevel + 1);
+                queue.add(cur.right);
+            }
+        }
+    }
+
+    // 验证一棵树是否为BST
+    public static int preValue = Integer.MIN_VALUE;
+
+    public boolean isBst(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        boolean isLeftBst = isBst(root.left);
+        if (!isLeftBst) {
+            return false;
+        }
+        if (root.value <= preValue) {
+            return false;
+        } else {
+            preValue = root.value;
+        }
+        return isBst(root.right);
+    }
+
+//    public boolean isBst2(TreeNode root) {
+//        List<TreeNode> inOrderList = new ArrayList<>();
+//        // 主函数将process2函数中存储的list打印出来，for循环为升序就是BST
+//
+//
+//    }
+
+    public static void process2(TreeNode root, List<TreeNode> inOrderList) {
+        if (root == null) {
+            return;
+        }
+        process2(root.left, inOrderList);
+        inOrderList.add(root); // 其实就是中序遍历，但是这里不打印，改为存储在list中
+        process2(root.right, inOrderList);
+    }
+
+    // 完全二叉树的判断
+    // 1)任何一个节点，有右无左false 2)不违反第一原则下，如果遇到第一个左右不全的节点，后续所有节点必须全是叶子节点
+    public boolean isCBT(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        LinkedList<TreeNode> queue = new LinkedList<>();
+        // 是否遇到左右孩子不全的节点
+        boolean leaf = false; // 最开始是false
+        TreeNode l = null;
+        TreeNode r = null;
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            root = queue.poll();
+            l = root.left;
+            r = root.right;
+            if (
+                    // 条件二：如果遇到左右不全的节点之后，并且发现当前节点不是叶子节点
+                    (leaf && (l != null || r != null) ||
+                    (l == null || r != null))) { // 条件一：只有右节点，无左节点
+                return false;
+            }
+
+            if (l != null) {
+                queue.add(l);
+            }
+            if (r != null) {
+                queue.add(r);
+            }
+            if (l == null || r == null) {
+                leaf = true; // 一旦被标记为true，就不会再变了
+            }
+        }
+        return true;
+    }
+
+    // 如何判断一棵树是满二叉树
+    // 最大深度l - 节点数N (N = 2 ^ l - 1)
+
+
+    // 判断平衡二叉树（AVL Tree ?）
+    // left right && |left - right| <= 1 (how to calculate height depth)
+    public ReturnType process(TreeNode root) {
+        if (root == null) {
+            return new ReturnType(true, 0);
+        }
+
+        ReturnType leftData = process(root.left);
+        ReturnType rightData = process(root.right);
+
+        int height = Math.max(leftData.height, rightData.height) + 1;
+        boolean isBalanced = leftData.isBalanced && rightData.isBalanced &&
+                (Math.abs(leftData.height - rightData.height) < 2);
+        return new ReturnType(isBalanced, height);
+    }
 
 
 }
@@ -115,5 +240,15 @@ class TreeNode {
         this.value = value;
         this.left = left;
         this.right = right;
+    }
+}
+
+class ReturnType {
+    public boolean isBalanced;
+    public int height;
+
+    public ReturnType(boolean isBalanced, int height) {
+        this.isBalanced = isBalanced;
+        this.height = height;
     }
 }
