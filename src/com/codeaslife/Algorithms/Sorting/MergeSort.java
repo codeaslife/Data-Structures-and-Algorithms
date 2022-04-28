@@ -1,6 +1,7 @@
 package com.codeaslife.Algorithms.Sorting;
 
 public class MergeSort {
+
     public void sort(int[] array) {
         // Divide and Conquer 分治
         // Dividing and Merging

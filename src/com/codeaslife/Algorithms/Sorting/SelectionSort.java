@@ -1,6 +1,7 @@
 package com.codeaslife.Algorithms.Sorting;
 
 public class SelectionSort {
+
     public void sort(int[] array) {
         for (int i = 0; i < array.length; i++) {
             int minIndex = i;

@@ -109,6 +109,7 @@ public class CheckBST {
     }
 
     class ReturnData {
+
         public boolean isBST;
         public int min;
         public int max;

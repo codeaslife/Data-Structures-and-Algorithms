@@ -1,6 +1,7 @@
 package com.codeaslife.Algorithms.Sorting;
 
 public class CountingSort {
+
     public void sort(int[] array, int max) {
         int[] counts = new int[max + 1];
         for (int item : array) {

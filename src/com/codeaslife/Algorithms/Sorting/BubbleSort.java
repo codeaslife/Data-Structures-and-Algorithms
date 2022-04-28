@@ -1,6 +1,7 @@
 package com.codeaslife.Algorithms.Sorting;
 
 public class BubbleSort {
+
     public void sort(int[] array) {
         boolean isSorted;
         for (int i = 0; i < array.length; i++) {

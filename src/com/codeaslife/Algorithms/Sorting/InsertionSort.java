@@ -1,6 +1,7 @@
 package com.codeaslife.Algorithms.Sorting;
 
 public class InsertionSort {
+
     public void sort(int[] array) {
         for (int i = 1; i < array.length; i++) {
             int current = array[i];

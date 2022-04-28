@@ -3,6 +3,7 @@ package com.codeaslife.Structures.Trees;
 import java.util.*;
 
 public class Tree {
+
     public void preOrderTraverseRec(TreeNode root) {
         if (root == null) {
             return;
@@ -186,9 +187,9 @@ public class Tree {
             l = root.left;
             r = root.right;
             if (
-                    // 条件二：如果遇到左右不全的节点之后，并且发现当前节点不是叶子节点
+                // 条件二：如果遇到左右不全的节点之后，并且发现当前节点不是叶子节点
                     (leaf && (l != null || r != null) ||
-                    (l == null || r != null))) { // 条件一：只有右节点，无左节点
+                            (l == null || r != null))) { // 条件一：只有右节点，无左节点
                 return false;
             }
 
@@ -229,13 +230,18 @@ public class Tree {
 }
 
 class TreeNode {
+
     public int value;
     public TreeNode left;
     public TreeNode right;
-    public TreeNode() {}
+
+    public TreeNode() {
+    }
+
     public TreeNode(int value) {
         this.value = value;
     }
+
     public TreeNode(int value, TreeNode left, TreeNode right) {
         this.value = value;
         this.left = left;
@@ -244,6 +250,7 @@ class TreeNode {
 }
 
 class ReturnType {
+
     public boolean isBalanced;
     public int height;
 

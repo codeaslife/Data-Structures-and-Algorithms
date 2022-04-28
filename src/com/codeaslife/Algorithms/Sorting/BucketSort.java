@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class BucketSort {
+
     public void sort(int[] array, int numberOfBuckets) {
         int i = 0;
         for (List bucket : createBuckets(array, numberOfBuckets)) {

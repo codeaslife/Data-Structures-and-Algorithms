@@ -3,6 +3,7 @@ package com.codeaslife.Structures.Stacks;
 import java.util.Stack;
 
 public class StringReverser {
+
     public String reverse(String str) {
         if (str == null) {
             throw new IllegalStateException();

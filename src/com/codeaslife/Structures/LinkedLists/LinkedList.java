@@ -1,7 +1,9 @@
 package com.codeaslife.Structures.LinkedLists;
 
 public class LinkedList {
+
     class ListNode {
+
         private int value;
         private ListNode next;
 
